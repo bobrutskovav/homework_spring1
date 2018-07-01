@@ -1,6 +1,7 @@
 package service;
 
 import domain.Question;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,9 +11,9 @@ public class ConsoleHandlerServiceImpl implements ConsoleHandlerService {
 
     private String userName;
     private Scanner scanner;
-    private Map<Question, String> userAnswers = new HashMap<>();
 
-    private QuestionReaderService questionReaderService;
+
+    private final QuestionReaderService questionReaderService;
 
     public ConsoleHandlerServiceImpl(QuestionReaderService questionReaderService) {
         this.questionReaderService = questionReaderService;
@@ -23,12 +24,12 @@ public class ConsoleHandlerServiceImpl implements ConsoleHandlerService {
         scanner = new Scanner(System.in);
         List<Question> questions = questionReaderService.getAllQuestions();
         readUserInput();
-        startQuestionSession(questions);
+        Map<Question, String> userResult = startQuestionSession(questions);
         scanner.close();
-        calculateResultsOfTests();
+        calculateResultsOfTests(userResult);
     }
 
-    private void calculateResultsOfTests() {
+    private void calculateResultsOfTests(Map<Question, String> userAnswers) {
         int questionCounter = userAnswers.size();
         long rightAnswers = userAnswers.entrySet().stream()
                 .filter(x -> x.getValue().equalsIgnoreCase(x.getKey().getRightAnswer())).count();
@@ -45,8 +46,8 @@ public class ConsoleHandlerServiceImpl implements ConsoleHandlerService {
         System.out.println("Тестирование начинается!");
     }
 
-    private void startQuestionSession(List<Question> questions) {
-
+    private Map<Question, String> startQuestionSession(List<Question> questions) {
+        Map<Question, String> userAnswers = new HashMap<>();
         for (Question question : questions) {
             System.out.println("Вопрос № " + question.getId() + "\n" +
                     question.getName());
@@ -57,6 +58,7 @@ public class ConsoleHandlerServiceImpl implements ConsoleHandlerService {
             String userAnswer = scanner.nextLine();
             userAnswers.put(question, userAnswer);
         }
+        return userAnswers;
     }
 
 

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class QuestionDaoUnivocityImpl implements QuestionDao {
 
-    private String csvName;
+    private final String csvName;
 
     public QuestionDaoUnivocityImpl(String csvName) {
         this.csvName = csvName;

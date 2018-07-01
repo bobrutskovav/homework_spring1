@@ -6,7 +6,7 @@ import java.util.List;
 
 public class QuestionReaderServiceImpl implements QuestionReaderService {
 
-    private QuestionDao dao;
+    private final QuestionDao dao;
 
     public QuestionReaderServiceImpl(QuestionDao dao) {
         this.dao = dao;
