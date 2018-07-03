@@ -3,9 +3,11 @@ package config;
 import dao.QuestionDao;
 import dao.QuestionDaoUnivocityImpl;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import service.QuestionReaderService;
 import service.QuestionReaderServiceImpl;
 
@@ -15,13 +17,22 @@ import service.QuestionReaderServiceImpl;
 public class ConfigurationDefault {
 
     @Bean
-    public QuestionDao questionDao(@Value("${questions.filename}") String csvname) {
+    public QuestionDao questionDao(
+            @Value("#{ T(java.util.Locale).getDefault().toString() == 'ru_RU' ? '${questions.filename}' : '${questions.filename_eng}' }") String csvname) {
         return new QuestionDaoUnivocityImpl(csvname);
     }
 
     @Bean
-    public QuestionReaderService questionReaderService (QuestionDao questionDao) {
+    public QuestionReaderService questionReaderService(QuestionDao questionDao) {
         return new QuestionReaderServiceImpl(questionDao);
+    }
+
+    @Bean
+    public MessageSource messageSource() {
+        ReloadableResourceBundleMessageSource ms = new ReloadableResourceBundleMessageSource();
+        ms.setBasename("/l10n/bundle");
+        ms.setDefaultEncoding("UTF-8");
+        return ms;
     }
 
 
