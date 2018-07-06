@@ -18,7 +18,7 @@ public class ConfigurationDefault {
 
     @Bean
     public QuestionDao questionDao(
-            @Value("#{ T(java.util.Locale).getDefault().toString() == 'ru_RU' ? '${questions.filename}' : '${questions.filename_eng}' }") String csvname) {
+            @Value("#{ '${locale.default}' == 'ru_RU' ? 'questions.csv' : 'questions_eng.csv' }") String csvname) {
         return new QuestionDaoUnivocityImpl(csvname);
     }
 

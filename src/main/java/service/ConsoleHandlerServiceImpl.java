@@ -8,6 +8,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +19,15 @@ public class ConsoleHandlerServiceImpl implements ConsoleHandlerService {
     private final MessageSource messageSource;
     private String userName;
     private Scanner scanner;
+    private String locale;
 
 
     @Autowired
-    public ConsoleHandlerServiceImpl(QuestionReaderService questionReaderService, MessageSource messageSource) {
+    public ConsoleHandlerServiceImpl(QuestionReaderService questionReaderService, MessageSource messageSource,
+           @Value("${locale.default}") String locale) {
         this.questionReaderService = questionReaderService;
         this.messageSource = messageSource;
+        this.locale = locale;
     }
 
     @Override
@@ -69,7 +73,7 @@ public class ConsoleHandlerServiceImpl implements ConsoleHandlerService {
 
 
     private String getMsg(String propertyName, String[] args) {
-        return messageSource.getMessage(propertyName, args, Locale.getDefault());
+        return messageSource.getMessage(propertyName, args, new Locale(locale));
     }
 
 
