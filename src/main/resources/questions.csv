@@ -1,7 +1,7 @@
 id,name,rightA,wrongA1,wrongA2,wrongA3
-0,Test1,A,B,C,D
-1,Test2,B,A,C,D
-2,Test3,C,B,A,D
-3,Test4,D,E,A,D
-4,Test5,B,A,C,D
-5,Test6,C,B,A,D
+0,ТЕСТ1,A,B,C,D
+1,ТЕСТ2,B,A,C,D
+2,ТЕСТ3,C,B,A,D
+3,ТЕСТ4,D,E,A,D
+4,ТЕСТ5,B,A,C,D
+5,ТЕСТ6,C,B,A,D
