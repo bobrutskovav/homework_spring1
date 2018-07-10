@@ -10,6 +10,7 @@ import service.QuestionReaderService;
 import service.QuestionReaderServiceImpl;
 
 
+
 @SpringBootConfiguration
 public class ConfigurationDefault {
 

@@ -21,13 +21,14 @@ public class ConsoleHandlerServiceImpl implements ConsoleHandlerService {
     private ApplicationSettings applicationSettings;
 
 
+
     @Autowired
     public ConsoleHandlerServiceImpl(QuestionReaderService questionReaderService, MessageSource messageSource,
+
             ApplicationSettings applicationSettings) {
         this.questionReaderService = questionReaderService;
         this.messageSource = messageSource;
         this.applicationSettings = applicationSettings;
-        ;
     }
 
     @Override
