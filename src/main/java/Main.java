@@ -1,11 +1,18 @@
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import service.ConsoleHandlerService;
 
+
+@SpringBootApplication
+@ComponentScan(basePackages = {"dao", "service", "config"})
 public class Main {
 
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/context.xml");
-        ConsoleHandlerService consoleHandlerService = context.getBean(ConsoleHandlerService.class);
+        ConfigurableApplicationContext configurableApplicationContext = SpringApplication.run(Main.class);
+        ConsoleHandlerService consoleHandlerService = configurableApplicationContext
+                .getBean(ConsoleHandlerService.class);
         consoleHandlerService.startService();
     }
 

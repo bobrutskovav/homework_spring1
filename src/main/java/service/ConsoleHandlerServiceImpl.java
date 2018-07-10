@@ -1,22 +1,33 @@
 package service;
 
+import config.ApplicationSettings;
 import domain.Question;
-
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ConsoleHandlerServiceImpl implements ConsoleHandlerService {
 
+    private final QuestionReaderService questionReaderService;
+    private final MessageSource messageSource;
     private String userName;
     private Scanner scanner;
+    private ApplicationSettings applicationSettings;
 
 
-    private final QuestionReaderService questionReaderService;
-
-    public ConsoleHandlerServiceImpl(QuestionReaderService questionReaderService) {
+    @Autowired
+    public ConsoleHandlerServiceImpl(QuestionReaderService questionReaderService, MessageSource messageSource,
+            ApplicationSettings applicationSettings) {
         this.questionReaderService = questionReaderService;
+        this.messageSource = messageSource;
+        this.applicationSettings = applicationSettings;
+        ;
     }
 
     @Override
@@ -34,31 +45,35 @@ public class ConsoleHandlerServiceImpl implements ConsoleHandlerService {
         long rightAnswers = userAnswers.entrySet().stream()
                 .filter(x -> x.getValue().equalsIgnoreCase(x.getKey().getRightAnswer())).count();
         if (questionCounter - rightAnswers <= questionCounter / 2) {
-            System.out.println(userName + ", поздравляю! Тест пройден");
+            System.out.println(getMsg("test.success", new String[]{userName}));
         } else {
-            System.out.println(userName + ", очень жаль! Тест не пройден");
+            System.out.println(getMsg("test.fail", new String[]{userName}));
         }
     }
 
     private void readUserInput() {
-        System.out.println("Привет!!\nВведи своё имя:");
+        System.out.println(getMsg("hello", null));
         userName = scanner.nextLine();
-        System.out.println("Тестирование начинается!");
+        System.out.println(getMsg("test.start", null));
     }
 
     private Map<Question, String> startQuestionSession(List<Question> questions) {
         Map<Question, String> userAnswers = new HashMap<>();
         for (Question question : questions) {
-            System.out.println("Вопрос № " + question.getId() + "\n" +
-                    question.getName());
+            System.out.println(getMsg("question.id", new String[]{question.getId(), question.getName()}));
             System.out.println(
-                    "Варианты ответа: \n" + question.getWrongA2() + "\n" + question.getRightAnswer() + "\n" + question
-                            .getWrongA3() + "\n" + question.getWrongA1());
-            System.out.println("Напишите верный вариант ответа:");
+                    getMsg("question.options", new String[]{question.getWrongA2(), question.getRightAnswer(), question
+                            .getWrongA3(), question.getWrongA1()}));
+            System.out.println(getMsg("user.answer", null));
             String userAnswer = scanner.nextLine();
             userAnswers.put(question, userAnswer);
         }
         return userAnswers;
+    }
+
+
+    private String getMsg(String propertyName, String[] args) {
+        return messageSource.getMessage(propertyName, args, new Locale(applicationSettings.getLocale()));
     }
 
 
