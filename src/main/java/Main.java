@@ -4,14 +4,11 @@ import org.springframework.context.annotation.ComponentScan;
 
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"dao", "service", "config"})
+@ComponentScan(basePackages = {"dao", "service", "config", "shell"})
 public class Main {
 
     public static void main(String[] args) {
         SpringApplication.run(Main.class);
-//        ConsoleHandlerService consoleHandlerService = configurableApplicationContext
-//                .getBean(ConsoleHandlerService.class);
-//        consoleHandlerService.startService();
     }
 
 }

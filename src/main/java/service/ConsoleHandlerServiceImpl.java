@@ -37,7 +37,6 @@ public class ConsoleHandlerServiceImpl implements ConsoleHandlerService {
         List<Question> questions = questionReaderService.getAllQuestions();
         readUserInput();
         Map<Question, String> userResult = startQuestionSession(questions);
-        scanner.close();
         calculateResultsOfTests(userResult);
     }
 

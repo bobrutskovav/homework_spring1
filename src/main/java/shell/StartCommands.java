@@ -16,7 +16,7 @@ public class StartCommands {
         this.consoleHandlerService = consoleHandlerService;
     }
 
-    @ShellMethod("start")
+    @ShellMethod(value = "Start test", key = "start")
     public void start(@ShellOption String username) {
         consoleHandlerService.startService(username);
     }
