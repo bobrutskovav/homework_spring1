@@ -2,6 +2,6 @@ package service;
 
 public interface ConsoleHandlerService {
 
-    void startService();
+    void startService(String username);
 
 }

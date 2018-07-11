@@ -31,8 +31,9 @@ public class ConsoleHandlerServiceImpl implements ConsoleHandlerService {
     }
 
     @Override
-    public void startService() {
+    public void startService(String userName) {
         scanner = new Scanner(System.in);
+        this.userName = userName;
         List<Question> questions = questionReaderService.getAllQuestions();
         readUserInput();
         Map<Question, String> userResult = startQuestionSession(questions);
@@ -52,8 +53,7 @@ public class ConsoleHandlerServiceImpl implements ConsoleHandlerService {
     }
 
     private void readUserInput() {
-        System.out.println(getMsg("hello", null));
-        userName = scanner.nextLine();
+        System.out.println(getMsg("hello", new String[]{userName}));
         System.out.println(getMsg("test.start", null));
     }
 
