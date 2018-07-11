@@ -27,7 +27,6 @@ public class ConsoleHandlerServiceImpl implements ConsoleHandlerService {
         this.questionReaderService = questionReaderService;
         this.messageSource = messageSource;
         this.applicationSettings = applicationSettings;
-        ;
     }
 
     @Override
