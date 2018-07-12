@@ -65,6 +65,18 @@ public class Question {
                 Objects.equals(wrongA3, question.wrongA3);
     }
 
+    public Question(String id, String name, String rightAnswer, String wrongA1, String wrongA2, String wrongA3) {
+        this.id = id;
+        this.name = name;
+        this.rightAnswer = rightAnswer;
+        this.wrongA1 = wrongA1;
+        this.wrongA2 = wrongA2;
+        this.wrongA3 = wrongA3;
+    }
+
+    public Question() {
+    }
+
     @Override
     public int hashCode() {
 

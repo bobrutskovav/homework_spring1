@@ -2,24 +2,30 @@ package config;
 
 import dao.QuestionDao;
 import dao.QuestionDaoUnivocityImpl;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import service.QuestionReaderService;
 import service.QuestionReaderServiceImpl;
 
 
-@PropertySource("classpath:config.properties")
-@Configuration
+
+@SpringBootConfiguration
 public class ConfigurationDefault {
 
     @Bean
+    public ApplicationSettings applicationSettings() {
+        return new ApplicationSettings();
+    }
+
+
+    @Bean
     public QuestionDao questionDao(
-            @Value("#{ '${locale.default}' == 'ru_RU' ? 'questions.csv' : 'questions_eng.csv' }") String csvname) {
-        return new QuestionDaoUnivocityImpl(csvname);
+            ApplicationSettings applicationSettings) {
+
+        return new QuestionDaoUnivocityImpl(
+                applicationSettings.getLocale().equalsIgnoreCase("ru_RU") ? "questions.csv" : "questions_eng.csv");
     }
 
     @Bean

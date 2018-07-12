@@ -1,18 +1,18 @@
-import config.ConfigurationDefault;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import service.ConsoleHandlerService;
 
 
-@ComponentScan(basePackages = {"dao","service","config"})
+@SpringBootApplication
+@ComponentScan(basePackages = {"dao", "service", "config"})
 public class Main {
 
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
-        ConsoleHandlerService consoleHandlerService = context.getBean(ConsoleHandlerService.class);
+        ConfigurableApplicationContext configurableApplicationContext = SpringApplication.run(Main.class);
+        ConsoleHandlerService consoleHandlerService = configurableApplicationContext
+                .getBean(ConsoleHandlerService.class);
         consoleHandlerService.startService();
     }
 
