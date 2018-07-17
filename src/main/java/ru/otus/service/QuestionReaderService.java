@@ -1,6 +1,6 @@
-package service;
+package ru.otus.service;
 
-import domain.Question;
+import ru.otus.domain.*;
 import java.util.List;
 
 public interface QuestionReaderService {

@@ -1,9 +1,9 @@
-package dao;
+package ru.otus.dao;
 
 import com.univocity.parsers.common.processor.BeanListProcessor;
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
-import domain.Question;
+import ru.otus.domain.Question;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;

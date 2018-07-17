@@ -1,9 +1,8 @@
-package service;
+package ru.otus.service;
 
-import dao.QuestionDao;
-import domain.Question;
+import ru.otus.dao.QuestionDao;
+import ru.otus.domain.Question;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class QuestionReaderServiceImpl implements QuestionReaderService {
 

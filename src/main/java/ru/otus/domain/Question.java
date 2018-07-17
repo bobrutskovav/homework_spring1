@@ -1,4 +1,4 @@
-package domain;
+package ru.otus.domain;
 
 import com.univocity.parsers.annotations.Parsed;
 import java.util.Objects;

@@ -1,13 +1,13 @@
-package config;
+package ru.otus.config;
 
-import dao.QuestionDao;
-import dao.QuestionDaoUnivocityImpl;
+import ru.otus.dao.QuestionDao;
+import ru.otus.dao.QuestionDaoUnivocityImpl;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import service.QuestionReaderService;
-import service.QuestionReaderServiceImpl;
+import ru.otus.service.QuestionReaderService;
+import ru.otus.service.QuestionReaderServiceImpl;
 
 
 @SpringBootConfiguration
@@ -24,7 +24,7 @@ public class ConfigurationDefault {
             ApplicationSettings applicationSettings) {
 
         return new QuestionDaoUnivocityImpl(
-                applicationSettings.getLocale().equalsIgnoreCase("ru_RU") ? "questions.csv" : "questions_eng.csv");
+                "questions_" + applicationSettings.getLocale() +".csv");
     }
 
     @Bean

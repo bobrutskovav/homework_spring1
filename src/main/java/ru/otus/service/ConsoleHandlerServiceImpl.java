@@ -1,7 +1,7 @@
-package service;
+package ru.otus.service;
 
-import config.ApplicationSettings;
-import domain.Question;
+import ru.otus.config.*;
+import ru.otus.domain.Question;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -18,7 +18,7 @@ public class ConsoleHandlerServiceImpl implements ConsoleHandlerService {
     private final MessageSource messageSource;
     private String userName;
     private Scanner scanner;
-    private ApplicationSettings applicationSettings;
+    private String locale;
 
 
     @Autowired
@@ -26,7 +26,7 @@ public class ConsoleHandlerServiceImpl implements ConsoleHandlerService {
             ApplicationSettings applicationSettings) {
         this.questionReaderService = questionReaderService;
         this.messageSource = messageSource;
-        this.applicationSettings = applicationSettings;
+        this.locale = applicationSettings.getLocale();
     }
 
     @Override
@@ -71,7 +71,7 @@ public class ConsoleHandlerServiceImpl implements ConsoleHandlerService {
 
 
     private String getMsg(String propertyName, String[] args) {
-        return messageSource.getMessage(propertyName, args, new Locale(applicationSettings.getLocale()));
+        return messageSource.getMessage(propertyName, args, new Locale(locale));
     }
 
 

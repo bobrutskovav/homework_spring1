@@ -1,8 +1,10 @@
+package ru.otus;
+
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.BDDMockito.given;
 
-import dao.QuestionDao;
-import domain.Question;
+import ru.otus.dao.QuestionDao;
+import ru.otus.domain.Question;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -11,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
-import service.QuestionReaderService;
+import ru.otus.service.QuestionReaderService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Main.class)
